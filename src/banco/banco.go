@@ -3,10 +3,11 @@ package banco
 import (
 	"api/src/config"
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql" //Driver
+
+	_ "github.com/go-sql-driver/mysql" // Driver
 )
 
-//Conectar abre a conexão com o banco de dados e a retorna
+// Conectar abre a conexão com o banco de dados e a retorna
 func Conectar() (*sql.DB, error) {
 	db, erro := sql.Open("mysql", config.StringConexaoBanco)
 	if erro != nil {
@@ -17,5 +18,7 @@ func Conectar() (*sql.DB, error) {
 		db.Close()
 		return nil, erro
 	}
+
 	return db, nil
+
 }
