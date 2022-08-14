@@ -51,8 +51,8 @@ func retornarChaveDeVerificacao(token *jwt.Token) (interface{}, error) {
 	return config.SecretKey, nil
 }
 
-//ExtrairUsuarioId
-func ExtrairUsuarioId(r *http.Request) (uint64, error) {
+//ExtrairUsuarioID
+func ExtrairUsuarioID(r *http.Request) (uint64, error) {
 	tokenString := extrairToken(r)
 	token, erro := jwt.Parse(tokenString, retornarChaveDeVerificacao)
 	if erro != nil {
