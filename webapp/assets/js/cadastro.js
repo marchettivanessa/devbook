@@ -4,7 +4,7 @@ function criarUsuario(evento) {
     evento.preventDefault();
     console.log("Dentro da função usuário");
 
-    if ($('#senha').val() != $('#confirmarSenha').val()) {
+    if ($('#senha').val() != $('#confirmar-senha').val()) {
         alert("As senhas não coincidem!");
     }
 
