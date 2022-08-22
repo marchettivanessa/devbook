@@ -17,17 +17,17 @@ func FazerLogin(w http.ResponseWriter, r *http.Request) {
 		"email": r.FormValue("email"),
 		"senha": r.FormValue("senha"),
 	})
-
 	if erro != nil {
 		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
 
-	response, erro := http.Post("http://localhost:1000/login", "application-json", bytes.NewBuffer(usuario))
+	response, erro := http.Post("http://localhost:1000/login", "application/json", bytes.NewBuffer(usuario))
 	if erro != nil {
 		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
+	//defer response.Body.Close()
 
 	token, _ := ioutil.ReadAll(response.Body)
 
