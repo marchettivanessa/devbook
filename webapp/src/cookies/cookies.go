@@ -8,7 +8,7 @@ import (
 
 var s *securecookie.SecureCookie
 
-// Configurar utiliza as variáveis de ambiente para a criação do SecureCookie
+// Configurar vai utilizar as variáveis de ambiente para que SecureCookie seja criado
 func Configurar() {
 	s = securecookie.New(config.HashKey, config.BlockKey)
 }
@@ -35,7 +35,7 @@ func Salvar(w http.ResponseWriter, ID, token string) error {
 	return nil
 }
 
-// Ler retorna os valores armazenados no cookie
+// Ler vai retornar os valores armazenados no cookie
 func Ler(r *http.Request) (map[string]string, error) {
 	cookie, erro := r.Cookie("dados")
 	if erro != nil {

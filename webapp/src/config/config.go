@@ -10,7 +10,7 @@ import (
 var (
 	//ApiUrl representa a URL para a comunicação com a API
 	APIURL = ""
-	//Porta para onde a aplicação web está rodando
+	//Porta na qual a aplicação web está rodando
 	Porta = 0
 	//HashKey é utilizada para autenticar o cookie
 	HashKey []byte
@@ -18,7 +18,7 @@ var (
 	BlockKey []byte
 )
 
-//Carregar inicializa as variáveis de ambiente
+// Carregar inicializa as variáveis de ambiente
 func Carregar() {
 	var erro error
 	if erro = godotenv.Load(); erro != nil {
