@@ -47,6 +47,6 @@ func FazerLogin(w http.ResponseWriter, r *http.Request) {
 		respostas.JSON(w, http.StatusUnprocessableEntity, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
-	
+
 	respostas.JSON(w, http.StatusOK, nil)
 }

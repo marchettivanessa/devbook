@@ -14,7 +14,7 @@ type Rota struct {
 	RequerAutenticacao bool
 }
 
-//Configurar coloca todas as rotas dentro do router
+// Configurar coloca todas as rotas dentro do router
 func Configurar(router *mux.Router) *mux.Router {
 	rotas := rotasLogin
 	rotas = append(rotas, rotasUsuarios...)
@@ -36,5 +36,6 @@ func Configurar(router *mux.Router) *mux.Router {
 
 	fileServer := http.FileServer(http.Dir("./assets/"))
 	router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", fileServer))
+
 	return router
 }

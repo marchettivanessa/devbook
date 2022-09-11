@@ -6,12 +6,12 @@ function fazerLogin(evento) {
         url: "/login",
         metodo: "POST",
         data: {
-            email: $("email").val(),
+            email: $("#email").val(),
             senha: $("#senha").val(),
         }
     }).done(function (){
-        window.location = "/home"
+        window.location = "/home";
     }).fail(function (){
-        alert("Usuário ou senha inválidos!")
+        alert("Usuário ou senha inválidos!");
     });
 }
