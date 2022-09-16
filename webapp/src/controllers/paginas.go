@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
+	"webapp/src/config"
 	"webapp/src/utils"
 )
 
@@ -17,5 +19,11 @@ func CarregarPaginaDeCadastroDeUsuario(w http.ResponseWriter, r *http.Request) {
 
 // CarregarPaginaPrincipal carrega a página principal com as publicações
 func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
+	url := fmt.Sprintf("%s/publicacoes", config.APIURL)
+
+	//Caso a autenticação e criação do token estivesse ok:
+	//response, erro := requisicoes.FazerRequisicaoComAutenticacao(r, http.MethodGet, url, nil)
+	response, erro := http.Get(url)
+	fmt.Println(response.StatusCode, erro)
 	utils.ExecutarTemplate(w, "home.html", nil)
 }
