@@ -2,7 +2,7 @@ package cookies
 
 import (
 	"net/http"
-	"webapp/webapp/src/config"
+	"webapp/src/config"
 
 	"github.com/gorilla/securecookie"
 )
