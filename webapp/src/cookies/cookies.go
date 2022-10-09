@@ -2,7 +2,9 @@ package cookies
 
 import (
 	"net/http"
-	"webapp/src/config"
+	"webapp/webapp/src/config"
+
+	"github.com/gorilla/securecookie"
 )
 
 var s *securecookie.SecureCookie
