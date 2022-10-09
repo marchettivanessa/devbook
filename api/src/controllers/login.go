@@ -13,7 +13,7 @@ import (
 	"strconv"
 )
 
-//Login é responsável por autenticar um usuário na API
+// Login é responsável por autenticar um usuário na API
 func Login(w http.ResponseWriter, r *http.Request) {
 	corpoRequisicao, erro := ioutil.ReadAll(r.Body)
 	if erro != nil {
@@ -38,6 +38,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	usuarioSalvoNoBanco, erro := repositorio.BuscarPorEmail(usuario.Email)
 	if erro != nil {
 		respostas.Erro(w, http.StatusInternalServerError, erro)
+		return
 	}
 
 	if erro = seguranca.VerificarSenha(usuarioSalvoNoBanco.Senha, usuario.Senha); erro != nil {
@@ -48,9 +49,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	token, erro := autenticacao.CriarToken(usuarioSalvoNoBanco.ID)
 	if erro != nil {
 		respostas.Erro(w, http.StatusInternalServerError, erro)
+		return
 	}
 
-	usuarioId := strconv.FormatUint(usuarioSalvoNoBanco.ID, 10)
+	usuarioID := strconv.FormatUint(usuarioSalvoNoBanco.ID, 10)
 
-	respostas.JSON(w, http.StatusOK, modelos.DadosAutenticacao{ID: usuarioId, Token: token})
+	respostas.JSON(w, http.StatusOK, modelos.DadosAutenticacao{ID: usuarioID, Token: token})
 }

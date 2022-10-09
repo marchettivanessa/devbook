@@ -19,7 +19,7 @@ var (
 	SecretKey []byte
 )
 
-//Carregar vai inicializar as variáveis de ambiente
+// Carregar vai inicializar as variáveis de ambiente
 func Carregar() {
 	var erro error
 
