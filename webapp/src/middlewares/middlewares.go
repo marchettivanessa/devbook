@@ -3,7 +3,7 @@ package middlewares
 import (
 	"log"
 	"net/http"
-	"webapp/src/cookies"
+	//"webapp/src/cookies"
 )
 
 // Logger escreve informações da requisição no terminal
@@ -17,10 +17,10 @@ func Logger(proximaFuncao http.HandlerFunc) http.HandlerFunc {
 // Autenticar verifica a existência de cookies
 func Autenticar(proximaFuncao http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if _, erro := cookies.Ler(r); erro != nil {
-			http.Redirect(w, r, "/login", 302)
-			return
-		}
+		// if _, erro := cookies.Ler(r); erro != nil {
+		// 	http.Redirect(w, r, "/login", 302)
+		// 	return
+		// }
 		proximaFuncao(w, r)
 	}
 }

@@ -1,15 +1,8 @@
 package controllers
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
-	"strconv"
-	"webapp/src/config"
-	"webapp/src/cookies"
 	"webapp/src/modelos"
-	"webapp/src/requisicoes"
-	"webapp/src/respostas"
 	"webapp/src/utils"
 )
 
@@ -25,36 +18,36 @@ func CarregarPaginaDeCadastroDeUsuario(w http.ResponseWriter, r *http.Request) {
 
 // CarregarPaginaPrincipal carrega a página principal com as publicações
 func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
-	url := fmt.Sprintf("%s/publicacoes", config.APIURL)
+	// url := fmt.Sprintf("%s/publicacoes", config.APIURL)
 
-	//Caso a autenticação e criação do token estivesse ok:
-	response, erro := requisicoes.FazerRequisicaoComAutenticacao(r, http.MethodGet, url, nil)
-	if erro != nil {
-		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
-	}
-	defer response.Body.Close()
+	// //Caso a autenticação e criação do token estivesse ok:
+	// response, erro := requisicoes.FazerRequisicaoComAutenticacao(r, http.MethodGet, url, nil)
+	// if erro != nil {
+	// 	respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+	// }
+	// defer response.Body.Close()
 	//response, erro := http.Get(url)
-	if response.StatusCode >= 400 {
-		respostas.TratarStatusCodeDeErro(w, response)
-		return
-	}
+	// if response.StatusCode >= 400 {
+	// 	respostas.TratarStatusCodeDeErro(w, response)
+	// 	return
+	// }
 
 	var publicacoes []modelos.Publicacao
-	if erro = json.NewDecoder(response.Body).Decode(&publicacoes); erro != nil {
-		respostas.JSON(w, http.StatusUnprocessableEntity, respostas.ErroAPI{Erro: erro.Error()})
-		return
-	}
-	cookie, _ := cookies.Ler(r)
-	usuarioID, _ := strconv.ParseUint(cookie["id"], 10, 64)
+	// if erro := json.NewDecoder(response.Body).Decode(&publicacoes); erro != nil {
+	// 	respostas.JSON(w, http.StatusUnprocessableEntity, respostas.ErroAPI{Erro: erro.Error()})
+	// 	return
+	// }
+	// cookie, _ := cookies.Ler(r)
+	// usuarioID, _ := strconv.ParseUint(cookie["id"], 10, 64)
 
-	utils.ExecutarTemplate(w, "home.html", struct {
-		Publicacoes []modelos.Publicacao
-		UsuarioID   uint64
-	}{
-		Publicacoes: publicacoes,
-		UsuarioID:   usuarioID,
-	})
+	// utils.ExecutarTemplate(w, "home.html", struct {
+	// 	Publicacoes []modelos.Publicacao
+	// 	UsuarioID   uint64
+	// }{
+	// 	Publicacoes: publicacoes,
+	// 	UsuarioID:   usuarioID,
+	// })
 
-	//fmt.Println(response.StatusCode, erro)
-	//	utils.ExecutarTemplate(w, "home.html", publicacoes)
+	// fmt.Println(response.StatusCode, erro)
+	utils.ExecutarTemplate(w, "home.html", publicacoes)
 }
